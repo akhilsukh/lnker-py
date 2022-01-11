@@ -1,12 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, jsonify
-from wtforms import Form, URLField, StringField, validators
-from flask_bootstrap import Bootstrap
+from flask import Flask, render_template, redirect, url_for, jsonify, send_from_directory
 from forms import MainForm
+import os
 from db import get_all, get_redirect, create_redirect
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cT13FYw7nMowrpsBQBc29zwWhlBZL5j7'
-Bootstrap(app)
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -20,25 +18,25 @@ def index():
             message = False
             create_redirect(form.code.data, form.link.data)
             return redirect(url_for('confirmation', code=form.code.data))
-    return render_template('index.html', form=form, message=message)
+    return render_template('index.html', form=form, message=message, title="LNK")
 
 
 @app.route("/dashboard/<code>")
 def confirmation(code):
-    return render_template('confirmation.html', code=code)
+    return render_template('confirmation.html', code=code, title=f"LNK Dashboard | {code}")
 
 
 @app.route('/dashboard')
 def dashboard():
     rows = get_all()
     rows = [jsonify(code=row[0], link=row[1], visits=row[2]).get_json() for row in rows]
-    return render_template('dashboard.html', rows=rows)
+    return render_template('dashboard.html', rows=rows, title=f"LNK Dashboard")
 
 
 @app.route("/404")
 @app.errorhandler(404)
-def four_oh_four():
-    return render_template('404.html'), 404
+def four_oh_four(e):
+    return render_template('404.html', title="404 Error")
 
 
 @app.route("/<code>")
