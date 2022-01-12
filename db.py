@@ -1,4 +1,5 @@
-import sqlite3
+import click
+from flask.cli import with_appcontext
 import psycopg2
 import os
 
@@ -42,6 +43,8 @@ def create_redirect(code, link):
     return True
 
 
+@click.command(name='create_tables')
+@with_appcontext
 def create_db():
     connection = psycopg2.connect(DATABASE_URL)
     cursor = connection.cursor()
