@@ -1,10 +1,12 @@
 from flask import Flask, render_template, redirect, url_for, jsonify, send_from_directory
 from forms import MainForm
-import os
 from db import get_all, get_redirect, create_redirect
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cT13FYw7nMowrpsBQBc29zwWhlBZL5j7'
+
+with app.app_context():
+    from commands import *
 
 
 @app.route("/", methods=['GET', 'POST'])
