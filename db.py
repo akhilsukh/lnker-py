@@ -1,8 +1,12 @@
 import sqlite3
+import psycopg2
+import os
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 
 def get_all():
-    connection = sqlite3.connect("links.db")
+    connection = psycopg2.connect(DATABASE_URL)
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM links')
     rows = cursor.fetchall()
@@ -17,7 +21,7 @@ def get_link(cursor, code):
 
 
 def get_redirect(code, inc):
-    connection = sqlite3.connect("links.db")
+    connection = psycopg2.connect(DATABASE_URL)
     cursor = connection.cursor()
     res = get_link(cursor, code)
     if inc:
@@ -28,7 +32,7 @@ def get_redirect(code, inc):
 
 
 def create_redirect(code, link):
-    connection = sqlite3.connect("links.db")
+    connection = psycopg2.connect(DATABASE_URL)
     cursor = connection.cursor()
     if get_link(cursor, code):
         return False
@@ -36,3 +40,12 @@ def create_redirect(code, link):
     connection.commit()
     connection.close()
     return True
+
+
+def create_db():
+    connection = psycopg2.connect(DATABASE_URL)
+    cursor = connection.cursor()
+    cursor.execute(f"CREATE TABLE links (code text, link text, visits int)")
+    connection.commit()
+    connection.close()
+
