@@ -1,14 +1,14 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="container p-5">
+    <div class="container p-3 p-md-4 p-lg-5">
         <div class="mb-4">
             <h1 class="text-center font-weight-bold">Welcome to LNK</h1>
             <p class="text-center">LNK is a link shortener service like bit.ly. Try it today!</p>
         </div>
 
         <div class="container">
-            <form method="POST" class="form w-75 mx-auto">
+            <form method="POST" class="form mx-auto">
                 {{ form.csrf_token }}
                 <div class="mb-2">
                     {{ form.link.label(class_='form-label') }} {{ form.link(class_='form-control', placeholder='https://youtu.be/dQw4w9WgXcQ') }}

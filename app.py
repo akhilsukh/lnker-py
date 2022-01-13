@@ -1,12 +1,19 @@
-from flask import Flask, render_template, redirect, url_for, jsonify, send_from_directory
+from flask import Flask, render_template, redirect, url_for
 from forms import MainForm
-from db import get_all, get_redirect, create_redirect
+# from db import get_all, get_redirect, create_redirect
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cT13FYw7nMowrpsBQBc29zwWhlBZL5j7'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@localhost:5432/links"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-with app.app_context():
-    from commands import *
+from models import LinkModel
+
+# with app.app_context():
+#     from commands import *
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -14,11 +21,14 @@ def index():
     form = MainForm()
     message = False
     if form.validate_on_submit():
-        if get_redirect(form.code.data, False):
-            message = True
-        else:
+        # if get_redirect(form.code.data, False):
+        #     message = True
+        # else:
             message = False
-            create_redirect(form.code.data, form.link.data)
+            # create_redirect(form.code.data, form.link.data)
+            lm = LinkModel(link=form.link.data, code=form.code.data, visits=0)
+            db.session.add(lm)
+            db.session.commit()
             return redirect(url_for('confirmation', code=form.code.data))
     return render_template('index.html', form=form, message=message, title="LNK")
 
@@ -30,9 +40,11 @@ def confirmation(code):
 
 @app.route('/dashboard')
 def dashboard():
-    rows = get_all()
-    rows = [jsonify(code=row[0], link=row[1], visits=row[2]).get_json() for row in rows]
-    return render_template('dashboard.html', rows=rows, title=f"LNK Dashboard")
+    result = LinkModel.query.all()
+    print(result)
+    # rows = get_all()
+    # rows = [jsonify(code=row[0], link=row[1], visits=row[2]).get_json() for row in rows]
+    return render_template('dashboard.html', rows=result, title=f"LNK Dashboard")
 
 
 @app.route("/404")
@@ -43,10 +55,11 @@ def four_oh_four(e):
 
 @app.route("/<code>")
 def redirect_code(code):
-    d = get_redirect(code, True)
-    if not d:
-        return redirect(url_for('404'))
-    return redirect(d)
+    # d = get_redirect(code, True)
+    # if not d:
+    #     return redirect(url_for('404'))
+    # return redirect(d)
+    pass
 
 
 # @app.route("/create/<path:link>")

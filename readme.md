@@ -6,3 +6,11 @@
 
 - installing from requirements file: `python3 -m pip install -r requirements.txt`
 - backing up to requirements file: `python -m pip freeze > requirements.txt`
+
+
+- setting environment variable: `export DATABASE_URL="postgresql://localhost/links"`
+
+
+- starting postgresql server: `sudo service posgresql start`
+- stopping postgresql server: `sudo service postgresql stop`
+- restarting postgresql server: `sudo service postgresql restart`
