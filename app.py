@@ -6,7 +6,8 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cT13FYw7nMowrpsBQBc29zwWhlBZL5j7'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or "postgresql://postgres:postgres@localhost:5432/links"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or \
+                                        "postgresql://postgres:postgres@localhost:5432/links"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -59,7 +60,7 @@ def redirect_code(code):
     # if not d:
     #     return redirect(url_for('404'))
     # return redirect(d)
-    pass
+    return f'<p>{code}<p>'
 
 
 # @app.route("/create/<path:link>")
