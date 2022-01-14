@@ -1,6 +1,4 @@
 import psycopg2
-# from db import DATABASE_URL
-from sqlalchemy import Table, Column, Integer, String, ForeignKey
 from app import app, db, URI
 
 
