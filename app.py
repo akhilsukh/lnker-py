@@ -2,18 +2,19 @@ from flask import Flask, render_template, redirect, url_for
 from forms import MainForm
 # from db import get_all, get_redirect, create_redirect
 from flask_sqlalchemy import SQLAlchemy
-
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cT13FYw7nMowrpsBQBc29zwWhlBZL5j7'
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@localhost:5432/links"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or "postgresql://postgres:postgres@localhost:5432/links"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
-from models import LinkModel
 
-# with app.app_context():
-#     from commands import *
+with app.app_context():
+    from commands import *
+    from models import *
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -41,7 +42,6 @@ def confirmation(code):
 @app.route('/dashboard')
 def dashboard():
     result = LinkModel.query.all()
-    print(result)
     # rows = get_all()
     # rows = [jsonify(code=row[0], link=row[1], visits=row[2]).get_json() for row in rows]
     return render_template('dashboard.html', rows=result, title=f"LNK Dashboard")
