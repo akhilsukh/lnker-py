@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import Form, URLField, StringField, SubmitField, SelectField, validators
+from wtforms import URLField, StringField, SubmitField, SelectField, validators
 
 
 class MainForm(FlaskForm):

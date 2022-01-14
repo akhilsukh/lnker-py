@@ -7,15 +7,17 @@
                 <tr>
                     <th scope="col">Code</th>
                     <th scope="col">Link</th>
-                    <th scope="col">Visits</th>
+                    <th scope="col">Date Created</th>
                 </tr>
             </thead>
 
             {% for row in rows %}
                 <tr>
-                   <td class="">{{row.code}}</td>
+                   <td class=""><a href="{{row.link}}" target="_blank" rel="noopener noreferrer">
+                       {{row.code}}
+                   </a></td>
                    <td class="">{{row.link}}</td>
-                   <td class="">{{row.visits}}</td>
+                   <td class="">{{row.date.year}}</td>
                 </tr>
             {% endfor %}
         </table>
