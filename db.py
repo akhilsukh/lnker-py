@@ -1,7 +1,7 @@
 import psycopg2
-import os
-
-DATABASE_URL = os.environ.get("DATABASE_URL")
+# import os
+#
+# DATABASE_URL = os.environ.get("DATABASE_URL")
 
 
 # def get_all():
