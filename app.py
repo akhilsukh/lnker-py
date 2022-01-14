@@ -6,7 +6,14 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cT13FYw7nMowrpsBQBc29zwWhlBZL5j7'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localhost:5432/links')
+ENV = os.getenv('DATABASE_URL')
+if ENV:
+    if ENV.startswith('postgres:'):
+        app.config['SQLALCHEMY_DATABASE_URI'] = ENV.replace('postgres:', 'postgresql:')
+    else:
+        app.config['SQLALCHEMY_DATABASE_URI'] = ENV
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:5432/links'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
