@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="container p-5">
+    <div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -13,11 +13,11 @@
 
             {% for row in rows %}
                 <tr>
-                   <td class=""><a href="{{row.link}}" target="_blank" rel="noopener noreferrer">
+                   <td class=""><a href="/dashboard/{{row.code}}">
                        {{row.code}}
                    </a></td>
                    <td class="">{{row.link}}</td>
-                   <td class="">{{row.date.year}}</td>
+                   <td class="">{{row.date.strftime("%b %d %Y %I:%M %p")}}</td>
                 </tr>
             {% endfor %}
         </table>

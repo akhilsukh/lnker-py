@@ -11,6 +11,10 @@
 ### Environment Variables 
 - setting environment variable: `export DATABASE_URL="postgresql://localhost/lnk"`
 
+### Flask
+- Running flask: `flask run`
+- Running flask with auto-reload: `FLASK_APP=app.py FLASK_ENV=development flask run`
+
 ### Jumpstarting Server
 - starting postgresql server: `sudo service posgresql start`
 - stopping postgresql server: `sudo service postgresql stop`

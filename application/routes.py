@@ -1,7 +1,5 @@
-import os
 from app import app, db
 from flask import Flask, render_template, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from application.forms import MainForm
 import datetime
 
@@ -26,7 +24,10 @@ def index():
 
 @app.route("/dashboard/<code>")
 def confirmation(code):
-    return render_template('confirmation.html', code=code, title=f"LNK Dashboard | {code}")
+    if not LinkModel.query.filter_by(code=code).first():
+        return redirect(url_for('404'))
+    count = VisitModel.query.filter_by(code=code).count()
+    return render_template('confirmation.html', code=code, count=count, title=f"LNK Dashboard | {code}")
 
 
 @app.route('/dashboard')
@@ -47,7 +48,6 @@ def redirect_code(code):
     link = LinkModel.query.filter_by(code=f'{code}').first()
     if not link:
         return redirect(url_for('404'))
-    # insert into visits table
     visit = VisitModel(code=link.code, date=datetime.datetime.now())
     db.session.add(visit)
     db.session.commit()

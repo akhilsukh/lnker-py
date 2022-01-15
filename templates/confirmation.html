@@ -2,9 +2,10 @@
 
 {% block content %}
     {% set link = '/' + code %}
-    <div class="container p-4">
-        <h1 class="text-center">
-            LNK created: <a href={{link}} target="_blank" rel="noopener noreferrer"> {{link}} </a>
-        </h1>
+    <div class="">
+        <h2 class="text-center">
+            <a href={{link}} target="_blank" rel="noopener noreferrer"> {{link}}</a>
+            has been clicked {{ count }} times.
+        </h2>
     </div>
 {% endblock %}
