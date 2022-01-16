@@ -7,24 +7,26 @@
     </div>
 
     <div class="container my-5 form-box">
-        <form method="POST" class="form mx-auto">
+        <form method="POST" class="form-horizontal mx-auto col">
             {{ form.csrf_token }}
-            <div class="mb-2 input-group">
-                {{ form.link.label(class_='form-label pe-2 my-auto') }}
-                {{ form.link(class_='rounded-start form-control', placeholder='https://youtu.be/dQw4w9WgXcQ') }}
-            </div>
-            <div class="mb-4 row">
+            <div class="mb-2 row flex-wrap px-0">
                 <div class="col input-group">
-                    {{ form.code.label(class_='form-label pe-2 my-auto') }}
-                    {{ form.code(class_='rounded-start form-control', placeholder='yt-rr') }}
+                    <span class="input-group-text primary-bg" id="inputGroup-link">Link</span>
+                    {{ form.link(class_='form-control', choices=[(12, 'a'), ('13', b)], placeholder='https://youtu.be/dQw4w9WgXcQ') }}
+                </div>
+            </div>
+            <div class="row flex-wrap">
+                <div class="col-md input-group mb-2 pe-md-2">
+                    <span class="input-group-text primary-bg" id="inputGroup-code">Code</span>
+                    {{ form.code(class_='form-control', placeholder='yt-rr') }}
                     <button class="btn btn-outline-secondary outline-border" type="button" id="button-addon2">🔀</button>
                 </div>
-                <div class="col input-group">
-                    {{ form.expire.label(class_='form-label pe-2 my-auto') }}
-                    {{ form.expire(class_='rounded-start form-select') }}
+                <div class="col-md input-group mb-2 ps-md-2">
+                    <span class="input-group-text primary-bg" id="inputGroup-expiry">Expiry</span>
+                    {{ form.expire(class_='form-select') }}
                 </div>
             </div>
-            <div class="text-center">
+            <div class="text-center mt-2">
                 <input class="btn primary-btn px-5 border" type="submit" value="Create LNK">
             </div>
         </form>
