@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Be Vietnam Pro', sans-serif;
-    background-color: #F9F7F7;
+    background-color: #f9f9ff;
 }
 
 .primary {
@@ -14,7 +14,12 @@ body {
 }
 
 .primary-bg {
-    background-color: #DBE2EF;
+    background-color: #e1e8f5;
+}
+
+
+.primary-bg-light{
+    background-color: #f9f9ff;
 }
 
 .primary-btn {
@@ -46,6 +51,20 @@ a:hover {
 }
 
 .round {
-    border: 1px #3F72AF solid;
+    border: 1px #80808080 solid;
     border-radius: 12px;
+}
+
+.auth-box {
+    width: 30%;
+    min-width: 400px;
+}
+
+.form-box {
+    width: 70%;
+    min-width: 500px;
+}
+
+.outline-border {
+    border-color: #ced4da;
 }

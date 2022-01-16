@@ -3,21 +3,25 @@
 {% block content %}
     <div class="mb-3">
         <h1 class="text-center font-weight-bold m-2 primary-dark">Welcome to LNK</h1>
-        <p class="text-center">LNK is a URL shortener service like bit.ly. Try it today!</p>
+        <p class="text-center text-muted mt-2">LNK is a URL shortener service like bit.ly. Try it today!</p>
     </div>
 
-    <div class="container my-5">
+    <div class="container my-5 form-box">
         <form method="POST" class="form mx-auto">
             {{ form.csrf_token }}
-            <div class="mb-2">
-                {{ form.link.label(class_='form-label') }} {{ form.link(class_='form-control', placeholder='https://youtu.be/dQw4w9WgXcQ') }}
+            <div class="mb-2 input-group">
+                {{ form.link.label(class_='form-label pe-2 my-auto') }}
+                {{ form.link(class_='rounded-start form-control', placeholder='https://youtu.be/dQw4w9WgXcQ') }}
             </div>
             <div class="mb-4 row">
-                <div class="col">
-                    {{ form.code.label(class_='form-label') }} {{ form.code(class_='form-control', placeholder='yt-rr') }}
+                <div class="col input-group">
+                    {{ form.code.label(class_='form-label pe-2 my-auto') }}
+                    {{ form.code(class_='rounded-start form-control', placeholder='yt-rr') }}
+                    <button class="btn btn-outline-secondary outline-border" type="button" id="button-addon2">🔀</button>
                 </div>
-                <div class="col">
-                    {{ form.expire.label(class_='form-label') }} {{ form.expire(class_='form-select') }}
+                <div class="col input-group">
+                    {{ form.expire.label(class_='form-label pe-2 my-auto') }}
+                    {{ form.expire(class_='rounded-start form-select') }}
                 </div>
             </div>
             <div class="text-center">
@@ -26,19 +30,17 @@
         </form>
     </div>
 
-    {% if message == '' %}
-        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
-            <p>{{message}}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+    {% if message %}
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endif %}
 
     <div class="divider"></div>
 
-    <div class="container my-5 primary-bg p-sm-3 p-xs-3 p-md-4 p-lg-4 p-xl-4 round">
-        <h3 class="text-center mb-3">How to use LNK</h3>
+    <div class="container my-5 primary-bg p-3 p-md-4 p-lg-4 p-xl-4 round">
+        <h4 class="text-center primary-dark mb-3">LNK Frequently Asked Questions</h4>
         <div class="accordion " id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -51,7 +53,7 @@
                   URLs are important. However, they're often long, segmented, and hard to share or remember. A <strong>URL shortener</strong> takes your long, unwieldy URLs and provides you with a short customizable URL that reflects your brand and purpose.
                   <br class="mb-2">
                   For example, a URL shortener can take in a long Google Slides URL: <a class="underline primary">https://docs.google.com/presentation/d/17FV7dMR6Qu-70DVJZxemO137-20W8m2lDYye-Lk29gU/edit#slide=id.p</a>
-                  and provide you with this short and sharable URL: <a class="underline primary">https://lnk.it/disc-12</a>.
+                  and provide you with a short and sharable URL: <span class="text-decoration-underline  primary">https://lnk.it/disc-12</span>.
               </div>
             </div>
           </div>
@@ -80,9 +82,16 @@
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                  collapse plugin adds the appropriate classes that we use to style each element.
-                  LNK provides you with the ability to set expiry
+                  LNK offers:
+                  <ul>
+                      <li></li>
+                      <li>Both auto-expiring and *permanent links.</li>
+                      <li>Dashboard view to manage valuable interaction statistics.</li>
+                      <li></li>
+                  </ul>
+                  <div class="small">
+                      *Permanent links only for account holders.
+                  </div>
               </div>
             </div>
           </div>

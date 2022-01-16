@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import URLField, StringField, SubmitField, SelectField, validators
+from wtforms import URLField, StringField, SubmitField, SelectField, EmailField, PasswordField, validators
 
 
 class MainForm(FlaskForm):
@@ -9,3 +9,16 @@ class MainForm(FlaskForm):
     link = URLField(name='link', label='Link:', validators=[validators.length(min=5, max=200)])
     expire = SelectField(name='expire', label='Expiry:', choices=choices)
     submit = SubmitField('Create LNK')
+
+
+class LoginForm(FlaskForm):
+    email = EmailField(name='email', label='Email:', validators=[])
+    password = PasswordField(name='password', label='Password:', validators=[validators.length(min=6, max=18)])
+    submit = SubmitField('Login')
+
+
+class SignupForm(FlaskForm):
+    email = EmailField(name='email', label='Email:', validators=[])
+    password = PasswordField(name='password', label='Password:', validators=[validators.length(min=6, max=18)])
+    passwordConfirm = PasswordField(name='passwordConfirm', label='Confirm Password:', validators=[validators.length(min=6, max=18)])
+    submit = SubmitField('Signup')

@@ -1,6 +1,9 @@
 from app import db
-from sqlalchemy import Column, DateTime, String
+# from flask import Blueprint
+from sqlalchemy import Column, DateTime, String, Integer
 from flask_login import UserMixin
+
+# model = Blueprint('model', __name__)
 
 
 class LinkModel(db.Model):
@@ -22,12 +25,11 @@ class LinkModel(db.Model):
 class UserModel(UserMixin, db.Model):
     __tablename__ = 'users'
 
-    uid = Column(String(), primary_key=True)
-    email = Column(String())
-    password = Column(String())
+    id = Column(Integer, primary_key=True)
+    email = Column(String)
+    password = Column(String)
 
-    def __init__(self, uid, email, password):
-        self.uid = uid
+    def __init__(self, email, password):
         self.email = email
         self.password = password
 
