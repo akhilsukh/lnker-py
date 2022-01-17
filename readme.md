@@ -14,6 +14,7 @@
 ### Flask
 - Running flask: `flask run`
 - Running flask with auto-reload: `FLASK_APP=app.py FLASK_ENV=development flask run`
+- Alternatively on linux: `sudo pg_ctlcluster 12 main start`
 
 ### Jumpstarting Server
 - starting postgresql server: `sudo service posgresql start`

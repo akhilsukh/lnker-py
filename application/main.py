@@ -13,13 +13,13 @@ def index():
     form = MainForm()
     message = False
     if form.validate_on_submit():
-        if LinkModel.query.get(form.code.data):
+        if LinkModel.query.filter_by(code=form.code.data).first():
             message = f'Sorry, the code "{form.code.data}" is already in use.'
         else:
             db.session.add(LinkModel(link=form.link.data, code=form.code.data, date=datetime.datetime.now()))
             db.session.commit()
-            return redirect(url_for('confirmation', code=form.code.data))
-    return render_template('index.html', form=form, message=message, title="LNK", user=current_user)
+            return redirect(url_for('main.confirmation', code=form.code.data))
+    return render_template('main/index.html', form=form, message=message, title="LNK", user=current_user)
 
 
 @main.route("/dashboard/<code>")
@@ -27,20 +27,26 @@ def confirmation(code):
     if not LinkModel.query.filter_by(code=code).first():
         return redirect(url_for('404'))
     count = VisitModel.query.filter_by(code=code).count()
-    return render_template('confirmation.html', code=code, count=count, title=f"LNK Dashboard | {code}", user=current_user)
+    return render_template('main/confirmation.html', code=code, count=count, title=f"LNK Dashboard | {code}", user=current_user)
 
 
 @main.route('/dashboard')
 @login_required
 def dashboard():
     result = LinkModel.query.all()
-    return render_template('dashboard.html', rows=result, title=f"LNK Dashboard", user=current_user)
+    return render_template('main/dashboard.html', rows=result, title=f"LNK Dashboard", user=current_user)
+
+
+@main.route('/profile')
+@login_required
+def profile():
+    return render_template('main/profile.html', title=f"LNK Profile", user=current_user)
 
 
 @main.route("/404")
 @main.errorhandler(404)
 def four_oh_four(e):
-    return render_template('404.html', title="404 Error")
+    return render_template('base/404.html', title="404 Error")
 
 
 @main.route("/<code>")
