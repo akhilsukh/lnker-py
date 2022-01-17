@@ -18,6 +18,14 @@
             <div class="text-center mb-4">
                 <input class="btn primary-btn px-5 border" type="submit" value="Login">
             </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        {{ messages[0] }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+            {% endwith %}
             <p class="small text-center">Don't have an account? <a href="/signup">Sign up</a> now.</p>
         </form>
     </div>

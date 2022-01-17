@@ -24,9 +24,10 @@
             </div>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
-                <div class="">
-                    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
-                </div>
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        {{ messages[0] }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 {% endif %}
             {% endwith %}
             <p class="small text-center">Already have an account? <a href="/login">Login</a> now.</p>
