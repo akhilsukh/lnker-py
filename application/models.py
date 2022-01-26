@@ -1,25 +1,27 @@
 from app import db
-# from flask import Blueprint
 from sqlalchemy import Column, DateTime, String, Integer
 from flask_login import UserMixin
-
-# model = Blueprint('model', __name__)
 
 
 class LinkModel(db.Model):
     __tablename__ = 'links'
 
-    code = Column(String(), primary_key=True)
-    link = Column(String())
-    date = Column(DateTime())
+    code = Column(String, primary_key=True)
+    link = Column(String)
+    id = Column(Integer)
+    date_created = Column(DateTime)
+    date_expiry = Column(DateTime)
 
-    def __init__(self, code, link, date):
+    def __init__(self, code, link, date_created, date_expiry, id):
         self.code = code
         self.link = link
-        self.date = date
+        self.date_created = date_created
+        self.date_expiry = date_expiry
+        self.id = id
 
     def __repr__(self):
-        return f"{self.code}:{self.link[:10] + ('...' if len(self.link) > 10 else '')}, created on {self.date}"
+        return f"{self.code}:{self.link[:10] + ('...' if len(self.link) > 10 else '')}, " \
+               f"created on {self.date} by {self.id}"
 
 
 class UserModel(UserMixin, db.Model):

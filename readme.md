@@ -1,4 +1,4 @@
-# Guide to CLI commands for LNK
+# Guide to CLI commands for LNKER
 ### Environment
 - creating environment: `python3 -m venv env`
 - activating environment: `source env/bin/activate`
@@ -18,6 +18,7 @@
 
 ### Jumpstarting Server
 - starting postgresql server: `sudo service posgresql start`
+  - alternatively: `pg_ctlcluster 12 main start`
 - stopping postgresql server: `sudo service postgresql stop`
 - restarting postgresql server: `sudo service postgresql restart`
 

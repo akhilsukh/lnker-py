@@ -3,6 +3,7 @@
 {% block content %}
     {% set link = '/' + code %}
     <div class="">
+        <div class="text-center pb-2"> {{ qr.svg_inline(dark='#112D4E', scale=4) | safe }} </div>
         <h2 class="text-center">
             <a href={{link}} target="_blank" rel="noopener noreferrer"> {{link}}</a>
             has been clicked {{ count }} times.
