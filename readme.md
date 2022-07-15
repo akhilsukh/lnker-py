@@ -1,4 +1,4 @@
-# Check out [lnker.me](https://github.com/akhilsukh/lnker)!
+# Check out [lnker.me](www.lnker.me)!
 
 ## Guide to CLI commands for LNKER
 ### Environment
