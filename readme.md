@@ -1,4 +1,6 @@
-# Guide to CLI commands for LNKER
+# Check out [lnker.me](https://github.com/akhilsukh/lnker)!
+
+## Guide to CLI commands for LNKER
 ### Environment
 - creating environment: `python3 -m venv env`
 - activating environment: `source env/bin/activate`
