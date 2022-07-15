@@ -1,4 +1,4 @@
-# Check out [lnker.me](www.lnker.me)!
+# Check out [lnker.me](https://lnker.me/)!
 
 ## Guide to CLI commands for LNKER
 ### Environment
